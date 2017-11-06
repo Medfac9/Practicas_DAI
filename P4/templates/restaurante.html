@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Mi web</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="/static/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+    <!-- DataTables CSS -->
+    <link href="/static/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
+
+    <!-- DataTables Responsive CSS -->
+    <link href="/static/vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/static/dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/"><img style="width: 50px;" src="/static/imagenes/logo.png" alt='Logo' /></a>
+                <a class="navbar-brand" href="/">Mi web</a>
+                <a class="navbar-brand">"Esto es un subtitulo"</a>
+            </div>
+            <!-- /.navbar-header -->
+
+            <ul class="nav navbar-top-links navbar-right">
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                      {% if logueado %}
+                        <li><a href="/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                      {% else %}
+                        <li><a href="/login"><i class="fa fa-sign-in fa-fw"></i> Log in</a>
+                        </li>
+                        <li><a href="/registro"><i class="fa fa-sign-in fa-fw"></i> Registro</a>
+                        </li>
+                      {% endif %}
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li>
+                            <a href="/"><i class="fa fa-home fa-fw"></i> Inicio</a>
+                        </li>
+                        <li>
+                            <a href="/usuario"><i class="fa fa-user fa-fw"></i> Usuario</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-files-o fa-fw"></i> Otras páginas<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="/blank">Página blanca</a>
+                                </li>
+                                <li>
+                                    <a href="/ejemplo">Página de ejemplo</a>
+                                </li>
+                                <li>
+                                    <a href="/ultima">Última página</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="/restaurante"><i class="fa fa-cutlery fa-fw"></i> Restaurante</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Restaurante</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Base de datos
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+
+                          <ol class="breadcrumb">
+                            <div class="row">
+                                <label>
+                                  <div class="col-md-8">
+                                    <form action="/comprobarRestaurantes" method="POST">
+                                    <select name="opcion" aria-controls="dataTable" class="form-control form-control-sm">
+                                      {% if varCiudad %}
+                                        <option value="Ciudad" selected>Ciudad</option>
+                                      {% else %}
+                                        <option value="Ciudad">Ciudad</option>
+                                      {% endif %}
+                                      {% if varPuntuacion %}
+                                      <option value="Puntuacion" selected>Puntuación</option>
+                                      {% else %}
+                                        <option value="Puntuacion" >Puntuación</option>
+                                      {% endif %}
+                                      {% if varCocina %}
+                                      <option value="Cocina" selected>Tipo de cocina</option>
+                                      {% else %}
+                                        <option value="Cocina" >Tipo de cocina</option>
+                                      {% endif %}
+                                    </select>
+                                  </div>
+                                  <div class="col-md-2">
+                                    <input class="btn btn-primary" type = "submit" name="enviar" value="Enviar">
+                                  </div>
+                                </form>
+                              </label>
+                            </div>
+                          </ol>
+                          {% if varCiudad %}
+                          <ol class="breadcrumb">
+                            <div class="row">
+                                <label>
+                                  <div class="col-md-8">
+                                    <form action="/comprobarCiudad" method="POST">
+                                    <select name="opcion" aria-controls="dataTable" class="form-control form-control-sm">
+                                      {% for ciudades in lista_ciudades %}
+                                      {% if ciudades == checked %}
+                                      <option value={{ciudades}} selected>{{ciudades}}</option>
+                                      {% else %}
+                                        <option value={{ciudades}}>{{ciudades}}</option>
+                                      {% endif %}
+                                      {% endfor %}
+                                    </select>
+                                  </div>
+                                  <div class="col-md-2">
+                                    <input class="btn btn-primary" type = "submit" name="enviar" value="Enviar">
+                                  </div>
+                                </form>
+                              </label>
+                            </div>
+                          </ol>
+                          {% endif %}
+                          {% if varPuntuacion %}
+                          <ol class="breadcrumb">
+                            <div class="row">
+                                <label>
+                                  <div class="col-md-8">
+                                    <form action="/comprobarPuntuacion" method="POST">
+                                    <select name="opcion" aria-controls="dataTable" class="form-control form-control-sm">
+                                      {% for puntuacion in lista_puntuaciones %}
+                                      {% if puntuacion == checked %}
+                                      <option value={{puntuacion}} selected>{{puntuacion}}</option>
+                                      {% else %}
+                                        <option value={{puntuacion}}>{{puntuacion}}</option>
+                                      {% endif %}
+                                      {% endfor %}
+                                    </select>
+                                  </div>
+                                  <div class="col-md-2">
+                                    <input class="btn btn-primary" type = "submit" name="enviar" value="Enviar">
+                                  </div>
+                                </form>
+                              </label>
+                            </div>
+                          </ol>
+                          {% endif %}
+                          {% if varCocina %}
+                          <ol class="breadcrumb">
+                            <div class="row">
+                                <label>
+                                  <div class="col-md-8">
+                                    <form action="/comprobarCocina" method="POST">
+                                    <select name="opcion" aria-controls="dataTable" class="form-control form-control-sm">
+                                      {% for tipos in lista_tipos %}
+                                      {% if tipos == checked %}
+                                      <option value={{tipos}} selected>{{tipos}}</option>
+                                      {% else %}
+                                        <option value={{tipos}}>{{tipos}}</option>
+                                      {% endif %}
+                                      {% endfor %}
+                                    </select>
+                                  </div>
+                                  <div class="col-md-2">
+                                    <input class="btn btn-primary" type = "submit" name="enviar" value="Enviar">
+                                  </div>
+                                </form>
+                              </label>
+                            </div>
+                          </ol>
+                          {% endif %}
+                            <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre del restaurante</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for restaurante in lista %}
+                                      <tr class="odd gradeX">
+                                        <td>{{restaurante}}</td>
+                                      </tr>
+                                    {%endfor%}
+                                </tbody>
+                              </table>
+                              <!-- /.table-responsive -->
+                          </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+        </div>
+        <!-- /#page-wrapper -->
+        <div class="col-md-6 col-md-offset-3">
+        <div style="margin-top: 7px;">© Esta Web se reserva los derechos de autor. Realizada por Rafael Medina Facal.</div>
+        </div>
+        <div  class="col-md-2">
+                <a style="float: right" href="https://twitter.com/MrMedfac9" class="btn btn-social-icon btn-twitter"><i class="fa fa-twitter"></i></a>
+                <a style="float: right" href="https://www.linkedin.com/in/medfac9/" class="btn btn-social-icon btn-linkedin"><i class="fa fa-linkedin"></i></a>
+                <a style="float: right" href="https://github.com/Medfac9" class="btn btn-social-icon btn-github"><i class="fa fa-github"></i></a>
+                <a style="float: right" href="https://plus.google.com/102767543242057926676?hl=es" class="btn btn-social-icon btn-google-plus"><i class="fa fa-google-plus"></i></a>
+        </div>
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="/static/vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="/static/vendor/metisMenu/metisMenu.min.js"></script>
+
+    <!-- DataTables JavaScript -->
+    <script src="/static/vendor/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="/static/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+    <script src="/static/vendor/datatables-responsive/dataTables.responsive.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="/static/dist/js/sb-admin-2.js"></script>
+
+    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+    <script>
+    $(document).ready(function() {
+        $('#dataTables-example').DataTable({
+            responsive: true
+        });
+    });
+    </script>
+
+</body>
+
+</html>
