@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Mi web</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="/static/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/static/dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="/static/vendor/morrisjs/morris.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="{% url 'index' %}"><img style="width: 50px;" src="/static/imagenes/logo.png" alt='Logo' /></a>
+                <a class="navbar-brand" href="{% url 'index' %}">Mi web</a>
+                <a class="navbar-brand">"Esto es un subtitulo"</a>
+            </div>
+            <!-- /.navbar-header -->
+
+            <ul class="nav navbar-top-links navbar-right">
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                      {% if logueado %}
+                        <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                      {% else %}
+                        <li><a href="{% url 'login' %}"><i class="fa fa-sign-in fa-fw"></i> Log in</a>
+                        </li>
+                        <li><a href="{% url 'registro' %}"><i class="fa fa-sign-in fa-fw"></i> Registro</a>
+                        </li>
+                      {% endif %}
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li>
+                            <a href="{% url 'index' %}"><i class="fa fa-home fa-fw"></i> Inicio</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'usuario' %}"><i class="fa fa-user fa-fw"></i> Usuario</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-files-o fa-fw"></i> Otras páginas<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{% url 'blank' %}">Página blanca</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'ejemplo' %}">Página de ejemplo</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'ultima' %}">Última página</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="{% url 'restauranteAjax' %}"><i class="fa fa-cutlery fa-fw"></i> Restaurante Ajax</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'formulario' %}"><i class="fa fa-check-square-o fa-fw"></i> Formulario</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Formulario</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+                <div class="col-lg-12">
+                  <div class="panel panel-default">
+                      <div class="panel-heading">
+                          Datos del resetaurante
+                      </div>
+                      <div class="panel-body">
+                          <div class="row">
+                            <form action="/restaurantes/nuevo_restaurante/" method="post">
+                                <div class="form-group">
+                                    {% csrf_token %}
+                                    {{ form.as_p }}
+                                    {{ datos }}
+                                </div>
+                                <div class="row-border">
+                                    <div class="col-md-6">
+                                            <div class="form-group">
+                                            <label>Nombre:</label>
+                                            <input type="text" class="form-control" id="name" name="name" >
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Tipo de cocina:</label>
+                                            <input type="text" class="form-control" id="tipo" name="tipo" >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <input type="submit" class="btn btn-primary" value="Enviar" />
+                                    </div>
+                                </div>
+                            </form>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+        </div>
+        <!-- /#page-wrapper -->
+        <div class="col-md-6 col-md-offset-3">
+        <div style="margin-top: 7px;">© Esta Web se reserva los derechos de autor. Realizada por Rafael Medina Facal.</div>
+        </div>
+        <div  class="col-md-2">
+                <a style="float: right" href="https://twitter.com/MrMedfac9" class="btn btn-social-icon btn-twitter"><i class="fa fa-twitter"></i></a>
+                <a style="float: right" href="https://www.linkedin.com/in/medfac9/" class="btn btn-social-icon btn-linkedin"><i class="fa fa-linkedin"></i></a>
+                <a style="float: right" href="https://github.com/Medfac9" class="btn btn-social-icon btn-github"><i class="fa fa-github"></i></a>
+                <a style="float: right" href="https://plus.google.com/102767543242057926676?hl=es" class="btn btn-social-icon btn-google-plus"><i class="fa fa-google-plus"></i></a>
+        </div>
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="/static/vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="/static/vendor/metisMenu/metisMenu.min.js"></script>
+
+    <!-- Morris Charts JavaScript -->
+    <script src="/static/vendor/raphael/raphael.min.js"></script>
+    <script src="/static/vendor/morrisjs/morris.min.js"></script>
+    <script src="/static/data/morris-data.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="/static/dist/js/sb-admin-2.js"></script>
+
+</body>
+
+</html>
