@@ -150,3 +150,19 @@ def crearRestaurante(nombre, tipo):
         return True
     else:
         return False
+
+def modificar_restaurante(request):
+    if request.method == 'POST':
+        form = NameForm(request.POST)
+        if form.is_valid():                 
+            #Meter en base de datos
+            datos = crearRestaurante(request.POST["name"], request.POST["tipo"])
+            if(datos):
+                context = {"datos": "Se ha modificado correctamente o modificado correctamente"}
+                return render(request, 'formulario.html', context)
+            else:
+                context = {"datos": "No se ha modificado correctamente"}
+                return render(request, 'formulario.html', context)
+        else:
+            context = {"datos": "Algunos de los campos es incorrecto"}
+            return render(request, 'formulario.html', context)

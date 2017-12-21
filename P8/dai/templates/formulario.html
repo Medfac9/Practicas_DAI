@@ -56,12 +56,12 @@
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                       {% if logueado %}
-                        <li><a href="{% url 'auth_logout' %}?next=/restaurantes/"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                       {% else %}
-                        <li><a href="{% url 'auth_login' %}"><i class="fa fa-sign-in fa-fw"></i> Log in</a>
+                        <li><a href="{% url 'login' %}"><i class="fa fa-sign-in fa-fw"></i> Log in</a>
                         </li>
-                        <li><a href="{% url 'registration_register' %}"><i class="fa fa-sign-in fa-fw"></i> Registro</a>
+                        <li><a href="{% url 'registro' %}"><i class="fa fa-sign-in fa-fw"></i> Registro</a>
                         </li>
                       {% endif %}
                     </ul>
@@ -84,7 +84,7 @@
                             <a href="#"><i class="fa fa-files-o fa-fw"></i> Otras páginas<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="{% url 'blank' %}">Error</a>
+                                    <a href="{% url 'blank' %}">Página blanca</a>
                                 </li>
                                 <li>
                                     <a href="{% url 'ejemplo' %}">Página de ejemplo</a>
@@ -125,12 +125,10 @@
                                 <div class="form-group">
                                     {% csrf_token %}
                                     {{ form.as_p }}
+                                    <div class="alert alert-success">
+                                            {{ datos }}
+                                    </div>
                                 </div>
-                                {% if datos %}
-                                <div class="alert alert-success">
-                                        {{ datos }}
-                                </div>
-                                {% endif %}
                                 <div class="row-border">
                                     <div class="col-md-6">
                                             <div class="form-group">

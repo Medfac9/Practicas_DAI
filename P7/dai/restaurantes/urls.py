@@ -19,4 +19,5 @@ urlpatterns = [
   url(r'^get-restaurants/(?P<tipo_cocina>[a-zA-Z]+)/(?P<barrio>[a-zA-Z]+)/(?P<numero_restaurantes>\d+)$', views.get_restaurants),
   url(r'^formulario$', views.formulario, name='formulario'),
   url(r'^nuevo_restaurante/$', views.nuevo_restaurante),
+  url(r'^modificar_restaurante/$', views.modificar_restaurante),
 ]

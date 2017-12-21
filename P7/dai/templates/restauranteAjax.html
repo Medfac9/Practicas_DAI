@@ -161,6 +161,7 @@
                                     <th>Nombre</th>
                                     <th>Dirección</th>
                                     <th>Puntuaciones</th>
+                                    <th>Modificar</th>
                                   </tr>
                               </thead>
                               <tbody id="restaurants-box">
@@ -234,7 +235,7 @@
           $("#restaurants-box").empty();
           for (var i in result)
           {
-            $("#restaurants-box").append("<tr><td>"+result[i].name+"</td><td>"+result[i].address+"</td><td>"+result[i].grade+"</td></tr>");
+            $("#restaurants-box").append("<tr><td>"+result[i].name+"</td><td>"+result[i].address+"</td><td>"+result[i].grade+"</td><td>"+"<a href={% url 'formulario' %}>Editar</a>"+"</td></tr>");
           }
         },
         error:function(result){
@@ -256,7 +257,7 @@
         {
           for (var i in result)
           {
-            $("#restaurants-box").append("<tr><td>"+result[i].name+"</td><td>"+result[i].address+"</td><td>"+result[i].grade+"</td></tr>");
+            $("#restaurants-box").append("<tr><td>"+result[i].name+"</td><td>"+result[i].address+"</td><td>"+result[i].grade+"</td><td>"+"<a href={% url 'formulario' %}>Editar</a>"+"</td></tr>");
           }
         },
         error:function(result){
