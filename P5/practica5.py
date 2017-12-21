@@ -222,9 +222,9 @@ def search_restaurants(tipo_cocina, barrio, skip=0):
     cursor = db.restaurants.find({"cuisine": tipo_cocina, "borough": barrio}).limit(10).skip(skip)
     return cursor
 
-def search_restaurants2(tipo_cocina, barrio, skip=0):
+def search_restaurants2(tipo_cocina, barrio, numero_restaurantes):
     db = client.test
-    cursor = db.restaurants.find({"cuisine": tipo_cocina, "borough": barrio}).limit(10).skip(skip)
+    cursor = db.restaurants.find({"cuisine": tipo_cocina, "borough": barrio}).limit(10).skip(numero_restaurantes)
     data = []
     for restaurante in cursor:
         print(restaurante)
